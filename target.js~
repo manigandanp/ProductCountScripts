@@ -1,0 +1,22 @@
+var request = require('request');
+var cheerio = require('cheerio');
+var tarball = require('tarball-extract');
+
+var url = "http://sitemap.target.com/wcsstore/SiteMap/sitemap_index.xml.gz";
+
+tarball.extractTarballDownload(url , './sitemap_index.xml.gz', './sitemap_index.xml', {}, function(err, result) {
+  console.log(err, result)
+})
+
+request(url, function(error, req, res){
+	var $ = cheerio.load(res);
+	console.log(res)
+	var loc = [];
+	$('loc').each(function(i, location){
+		loc[i] = $(this).text();
+		console.log(loc[i])
+		if(loc[i].match(/\/p\//) != null){
+			console.log("" + i +"-->"+ loc[i]);
+		}
+	});
+});
