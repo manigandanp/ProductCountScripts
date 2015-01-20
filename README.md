@@ -1,2 +1,2 @@
 # ProductCountScripts
-Scripts used to find product counts
+Scripts for finding product counts
