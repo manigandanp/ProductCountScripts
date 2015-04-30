@@ -1,18 +1,24 @@
 var request = require('request');
 var cheerio = require('cheerio');
 
-var url = "http://egypt.souq.com/eg-en/shop-all-categories/c/";
-var options = {uri:url, headers:{'User-Agent':'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'}};
+var url = "http://uae.souq.com/ae-en/shop-all-categories/c/"; //url = "http://egypt.souq.com/eg-en/shop-all-categories/c/";
+var options = {uri:url, headers:{'User-Agent':'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.115 Safari/537.36'} };
 
-var urlArr=[];
 
-request(url, function(error, response, html){
-	console.log(html);
-/*	var $ = cheerio.load(html);
-	$('.refinementBrowser-mainList li > a').each(function(i, hre){
-		urlArr[i] = $(this).attr('href');
-		console.log(urlArr[i]);
-		
+var urlArr=[], totalCount = 0;
+	console.log("Running..");
+request(options, function(error, reque, html){
+	var $ = cheerio.load(html);
+	$('div.phone-float-none ul li>a').each(function(i,hrf){
+		var newUrl = $(this).attr('href');
+		options.uri = newUrl;
+		request(options, function(err, req, res){
+			var $$ = cheerio.load(res);
+			var count = $$('.text-orange em').text().trim() != '' ? $$('.text-orange em').text() : 0;
+			count = parseInt(count);
+			totalCount+=count;
+//			console.log(req.request);
+			console.log(req.request.href +" <---> " + count + " <---> " + totalCount );
+		});
 	});
-*/
 });

@@ -1,0 +1,35 @@
+var url , basArr = [];
+Get BaseArr form Give Url
+Get Depth
+
+def extracter(arr, depth)
+ if depth ==1 || depth ==0
+  forEach in arr
+    allLinks = getUrlsOfAllLinks 
+    return allLinks
+ else
+  forEach in arr
+   allLinks = getUrlsOfAllLinks.push(extracter(arr, depth-1))
+   return allLinks
+
+
+
+ /*
+
+ Goto the first url
+ get baseUrls
+ get depth
+
+ if the depth is equal to 0 or 1 then 
+  loop thru each url of 0Arry
+   getUrls form each link
+   store it in a common array
+   return back that common array
+ else
+  loop thru each url of >0Arry
+   getUrls form each Link    //this will give an array
+   store it in a commonArray // >0Arry each urls gives an array and store it in this commonArray
+   call the same function with depth -1
+   return allArray
+
+ */
